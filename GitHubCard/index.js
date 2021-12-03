@@ -8,7 +8,7 @@ import axios  from 'axios';
 
 axios.get('https://api.github.com/users/leahball')
 .then(res => {
-  console.log(res);
+  // console.log(res);
 })
 .catch(error => {
   console.error(error)
@@ -59,6 +59,10 @@ const followersArray = [];
       </div>
     </div>
 */
+
+function cardMaker(obj) {
+  console.log(obj);
+}
 
 /*
   List of LS Instructors Github username's:

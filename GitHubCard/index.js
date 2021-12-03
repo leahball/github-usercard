@@ -8,7 +8,7 @@ import axios  from 'axios';
 
 axios.get('https://api.github.com/users/leahball')
 .then(res => {
-  // console.log(res);
+  console.log(res);
 })
 .catch(error => {
   console.error(error)
@@ -60,8 +60,51 @@ const followersArray = [];
     </div>
 */
 
-function cardMaker(obj) {
-  console.log(obj);
+function cardMaker(data) {
+
+//instantiating the elements
+const userCard = document.createElement('div');
+const image = document.createElement('img');
+const cardInfo = document.createElement('div');
+const name = document.createElement('h3');
+const userName = document.createElement('p');
+const userLocation = document.createElement('p');
+const profileP = document.createElement('p');
+const profileLink = document.createElement('p');
+const userFollowers = document.createElement('p');
+const userFollowing = document.createElement('p');
+const userBio = document.createElement('p');
+
+//setting classnames, attributes and content
+userCard.classList.add('card');
+image.src = data.avatar_url;
+cardInfo.classList.add('card-info');
+name.classList.add('name');
+name.textContent = data.name || data.login;
+userName.classList.add('username');
+userName.textContent = data.login;
+userLocation.textContent = `Location: ${data.location}`;
+profileP.textContent = `Profile: `;
+profileLink.textContent = data.html_url;
+profileLink.setAttribute('href', data.html_url);
+userFollowers.textContent = `Followers: ${data.followers}`;
+userFollowing.textContent = `Following: ${data.following}`;
+userBio.textContent = `Bio: ${data.bio}`;
+
+//Build Structure
+userCard.appendChild(image);
+userCard.appendChild(cardInfo);
+cardInfo.appendChild(name);
+cardInfo.appendChild(userName);
+cardInfo.appendChild(userLocation);
+cardInfo.appendChild(profileP);
+profileP.appendChild(profileLink);
+cardInfo.appendChild(userFollowers);
+cardInfo.appendChild(userFollowing);
+cardInfo.appendChild(userBio);
+
+return userCard;
+
 }
 
 /*

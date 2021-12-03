@@ -6,13 +6,17 @@ import axios  from 'axios';
     https://api.github.com/users/<your name>
 */
 
+const cardsSection = document.querySelector('.cards');
+
 axios.get('https://api.github.com/users/leahball')
 .then(res => {
-  console.log(res);
+  cardsSection.appendChild(cardMaker(res.data));
 })
 .catch(error => {
   console.error(error)
 })
+
+
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -38,7 +42,25 @@ axios.get('https://api.github.com/users/leahball')
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = [
+  'nyamekyeannor',
+  'brandynwilliams',
+  'morgankj',
+  'Shane-Gray394',
+  'abrannan4',
+  'lailaarkadan',
+  'malloryshea'
+];
+
+followersArray.forEach(item => {
+  axios.get(`https://api.github.com/users/${item}`)
+  .then(res => {
+    cardsSection.appendChild(cardMaker(res.data));
+  })
+  .catch(error => {
+    console.error(error)
+  })
+})
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -104,7 +126,6 @@ cardInfo.appendChild(userFollowing);
 cardInfo.appendChild(userBio);
 
 return userCard;
-
 }
 
 /*
